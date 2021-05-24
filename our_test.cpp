@@ -15,10 +15,10 @@ else \
 std::cout << "err" << std::endl; \
 } \
 
-#define TEST_OPS 100
-#define TEST_PROD_THREADS 7
+#define TEST_OPS 1000
+#define TEST_PROD_THREADS 6
 #define TEST_CONS_THREADS 1
-#define TEST_SLEEP_MS 10
+#define TEST_SLEEP_MS 1
 
 #define CHRONO_DBG_START(OP) \
 std::chrono::high_resolution_clock::time_point OP##s = std::chrono::high_resolution_clock::now(); \
