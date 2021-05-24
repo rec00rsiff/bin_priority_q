@@ -15,8 +15,8 @@ else \
 std::cout << "err" << std::endl; \
 } \
 
-#define TEST_OPS 300
-#define TEST_PROD_THREADS 3
+#define TEST_OPS 100
+#define TEST_PROD_THREADS 7
 #define TEST_CONS_THREADS 1
 #define TEST_SLEEP_MS 10
 
@@ -48,7 +48,7 @@ void producer_loop()
     size_t dops = 0;
     size_t dextr = 0;
     
-    while(dops < (TEST_OPS / TEST_PROD_THREADS))
+    while(dops < ((TEST_OPS * TEST_PROD_THREADS) / TEST_PROD_THREADS))
     {
         CHRONO_DBG_START(push);
         q.push(distr(r_eng));
@@ -107,7 +107,7 @@ void consumer_loop()
     }
     
     LOG_SYNC(std::cout << "T" << std::this_thread::get_id() << " | avg pop: " << (dall / dops) << " nanos, " << "extreme pop: " << dextr << " nanos" << std::endl;);
-    assert(ctr == TEST_OPS /*DERR: consumed != produced*/);
+    assert(ctr == (TEST_OPS * TEST_PROD_THREADS) /*DERR: consumed != produced*/);
 }
 
 int main()
